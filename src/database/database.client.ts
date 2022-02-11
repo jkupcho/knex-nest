@@ -1,13 +1,17 @@
-import { Knex } from 'knex';
+import { knex, Knex } from 'knex';
+import { IConfig } from 'config';
+import { Inject } from '@nestjs/common';
+import { NODE_CONFIG_TOKEN } from '../config/node-config.module';
 
 export class DatabaseClient {
   private readonly knexInstance: Knex;
 
-  constructor(knexInstance: Knex) {
-    this.knexInstance = knexInstance;
+  constructor(@Inject(NODE_CONFIG_TOKEN) config: IConfig) {
+    const knexConfig = config.get<Knex.Config>('db');
+    this.knexInstance = knex(knexConfig);
   }
 
-  getQueryBuilderForTable(tableName: string): Knex.QueryBuilder {
-    return this.knexInstance(tableName);
+  getKnex(): Knex {
+    return this.knexInstance;
   }
 }

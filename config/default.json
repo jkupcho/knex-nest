@@ -1,12 +1,12 @@
 {
   "db": {
-    "client": "mysql",
+    "client": "pg",
     "connection": {
       "host": "127.0.0.1",
-      "port": 3306,
-      "user": "",
-      "password": "your_database_password",
-      "database": "myapp_test"
+      "port": 5432,
+      "user": "ENV_VAR",
+      "password": "ENV_VAR",
+      "database": "postgres"
     }
   }
 }

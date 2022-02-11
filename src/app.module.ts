@@ -1,17 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ConfigModule as EnvConfigModule } from '@nestjs/config';
-import { ConfigModule } from './config/config.module';
+import { CreatorsModule } from './creators/creators.module';
+import { DatabaseModule } from './database/database.module';
+import { NodeConfigModule } from './config/node-config.module';
 
 @Module({
-  imports: [
-    EnvConfigModule.forRoot({
-      envFilePath: ['.env', '.jest.env'],
-    }),
-    ConfigModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [NodeConfigModule, DatabaseModule, CreatorsModule],
 })
 export class AppModule {}
